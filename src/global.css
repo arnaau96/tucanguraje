@@ -29,6 +29,10 @@ a.link-unstyled:hover {
   padding: 0.375rem 2rem;
 }
 
+.color {
+  color: orange;
+}
+
 .btn.btn-primary {
   color: #fff;
   background-color: #7DCD40;
