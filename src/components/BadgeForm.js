@@ -1,9 +1,6 @@
 import React from 'react';
 
 class BadgeForm extends React.Component {
-  handleClick = e => {
-    console.log('Button was clicked');
-  };
 
   render() {
     return (
@@ -65,7 +62,7 @@ class BadgeForm extends React.Component {
             />
           </div>
 
-          <button onClick={this.handleClick} className="btn btn-primary">
+          <button className="btn btn-primary">
             Save
           </button>
 

@@ -22,3 +22,12 @@
     align-items: flex-start;
   }
 }
+
+.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url("../../images/baby-sitter.jpg") no-repeat center center;
+  background-size: cover;
+  padding-top: 30rem;
+  padding-bottom: 8rem;
+}

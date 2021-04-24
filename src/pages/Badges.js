@@ -12,12 +12,12 @@ import PageError from '../components/PageError';
 class Badges extends React.Component {
   constructor(props) {
     super(props);
-    console.log('1. constructor()');
 
     this.state = {      
       loading: true,
       error: null,
       data:undefined,
+      query: this.props.match.params.query,
     };
   }
 
@@ -88,7 +88,7 @@ class Badges extends React.Component {
             </Link>
           </div>
 
-          <BadgesList badges={this.state.data} />
+          <BadgesList badges={this.state.data} query={this.state.query} />
         </div>
       </React.Fragment>
     );

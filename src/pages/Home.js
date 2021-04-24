@@ -1,39 +1,42 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, useImperativeHandle } from 'react';
+
+import HomeHeader from '../components/HomeHeader.js';
 
 import './styles/Home.css';
-import platziconfLogoImage from '../images/platziconf-logo.svg';
-import astronautsImage from '../images/astronauts.svg';
 
 export default class Home extends Component {
+  state = {
+    loading: false,
+    error: null,
+    query: '',
+    }
+  
+  myChangeHandler = (e) => {
+    this.setState({
+      query: e.target.value
+    });
+    console.log(this.state.query);
+  }
+
+  handleSubmit = async e => {
+    e.preventDefault()
+    this.setState({loading: true, error: null});
+    
+
+    try{
+      this.props.history.push(`/badges/${this.state.query}`);
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
   render() {
     return (
-      <div className="Home">
-        <div className="container">
-          <div className="row">
-            <div className="Home__col col-12 col-md-4">
-              <img
-                src={platziconfLogoImage}
-                alt="Platzi Conf Logo"
-                className="img-fluid mb-2"
-              />
-
-              <h1>Badge Management System</h1>
-              <Link className="btn btn-primary" to="/badges">
-                Start
-              </Link>
-            </div>
-
-            <div className="Home__col d-none d-md-block col-md-8">
-              <img
-                src={astronautsImage}
-                alt="Astronauts"
-                className="img-fluid p-4"
-              />
-            </div>
-          </div>
+      <React.Fragment>
+        <div class="masthead text-white text-center">
+          <HomeHeader query={this.state.query} onChange={this.myChangeHandler} onSubmit={this.handleSubmit} />
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
