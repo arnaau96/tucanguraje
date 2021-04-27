@@ -1,9 +1,6 @@
 .Home {
   width: 100%;
   min-height: calc(100vh - 60px);
-  background: url('../../images/stars.svg'), #1B1B25;
-  background-repeat: repeat;
-
   color: #ffffff;
 
   display: flex;

@@ -37,7 +37,7 @@ class BadgeNew extends React.Component {
     try{
       await api.badges.create(this.state.form);
       this.setState({loading: false});
-      this.props.history.push('/badges');
+      this.props.history.push('/badges/query');
     } catch(error){
       this.setState({loading: false, error: error});
     }
@@ -63,6 +63,7 @@ class BadgeNew extends React.Component {
                 jobTitle={this.state.form.jobTitle || 'JOB TITLE'}
                 email={this.state.form.email || 'TWITTER'}
                 avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
+                visible="N"
               />
             </div>
 

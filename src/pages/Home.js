@@ -1,4 +1,4 @@
-import React, { Component, useImperativeHandle } from 'react';
+import React, { Component } from 'react';
 
 import HomeHeader from '../components/HomeHeader.js';
 
@@ -24,7 +24,7 @@ export default class Home extends Component {
     
 
     try{
-      this.props.history.push(`/badges/${this.state.query}`);
+      this.props.history.push(`/badges/query/${this.state.query}`);
     } catch(error){
       this.setState({loading: false, error: error});
     }

@@ -4,13 +4,13 @@ function HomeHeader(props) {
 
     return (
         <React.Fragment>
-        <div class="overlay"></div>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div className="overlay"></div>
+            <div className="container">
+              <div className="row">
+                <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form >
-                    <div class="form-row">
-                        <div class="col-12 col-md-9 mb-2 mb-md-0">
+                    <div className="form-row">
+                        <div className="col-12 col-md-9 mb-2 mb-md-0">
                             <input
                             onChange ={props.onChange}                  
                             className="form-control form-control-lg"
@@ -19,7 +19,7 @@ function HomeHeader(props) {
                             placeholder="Introduce la ciudad para empezar..."                      
                             />                        
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div className="col-12 col-md-3">
                             <button onClick={props.onSubmit} className="btn btn-block btn-lg btn-primary"> 
                                 ENVIAR! 
                             </button>

@@ -7,16 +7,18 @@ import Gravatar from './Gravatar';
 class BadgesListItem extends React.Component {
   render() {
     return (
-      <div className="BadgesListItem">
+      <div className="BadgesListItem color">
         <Gravatar
           className="BadgesListItem__avatar"
           email={this.props.badge.email}
         />
 
         <div>
-          <strong>
-            {this.props.badge.firstName} {this.props.badge.lastName}
-          </strong>
+          <h5>
+            <strong>
+              {this.props.badge.firstName} {this.props.badge.lastName}
+            </strong>
+          </h5>
           <br />@{this.props.badge.twitter}
           <br />
           {this.props.badge.jobTitle}
@@ -28,7 +30,7 @@ class BadgesListItem extends React.Component {
 
 function useSearchBadges(badges,propquery) {
   
-  if(propquery == undefined){
+  if(propquery === undefined){
     propquery = '';
   }
 
@@ -97,7 +99,7 @@ function BadgesList(props) {
             <li key={badge.id}>
               <Link
                 className="text-reset text-decoration-none"
-                to={`/badges/${badge.id}`}
+                to={`/badges/${badge.id}/details`}
               >
                 <BadgesListItem badge={badge} />
               </Link>

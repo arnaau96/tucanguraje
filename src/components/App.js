@@ -15,11 +15,11 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/badges/:query" component={Badges} />
-          <Route exact path="/badges" component={Badges} />
+          <Route exact path="/badges/query/:query" component={Badges} />
+          <Route exact path="/badges/query/" component={Badges} />
           <Route exact path="/badges/new" component={BadgeNew} />
           <Route exact path="/badges/:badgeId/edit" component={BadgeEdit} />
-          <Route exact path="/badges/:badgeId" component={BadgeDetailsContainer} />
+          <Route exact path="/badges/:badgeId/details" component={BadgeDetailsContainer} />
           <Route component={NotFound} />
         </Switch>
       </Layout>
