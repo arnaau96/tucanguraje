@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import 'react-dropdown/style.css';
+
 import HomeHeader from '../components/HomeHeader.js';
 
 import './styles/Home.css';
@@ -30,12 +32,16 @@ export default class Home extends Component {
     }
   }
 
+  
+
   render() {
+    
     return (
       <React.Fragment>
-        <div class="masthead text-white text-center">
+        <div class="masthead text-white text-center">        
           <HomeHeader query={this.state.query} onChange={this.myChangeHandler} onSubmit={this.handleSubmit} />
-        </div>
+        </div>        
+      
       </React.Fragment>
     );
   }
