@@ -8,20 +8,17 @@ class BadgesListItem extends React.Component {
   render() {
     return (
       <div className="BadgesListItem color">
-        <Gravatar
-          className="BadgesListItem__avatar"
-          email={this.props.badge.email}
-        />
+
 
         <div>
           <h5>
             <strong>
-              {this.props.badge.firstName} {this.props.badge.lastName}
+              {this.props.badge.FIRSTNAME} {this.props.badge.LASTNAME}
             </strong>
           </h5>
-          <br />@{this.props.badge.twitter}
+          <br />@{this.props.badge.TWITTER}
           <br />
-          {this.props.badge.jobTitle}
+          {this.props.badge.JOBTITLE}
         </div>
       </div>
     );
@@ -96,10 +93,10 @@ function BadgesList(props) {
       <ul className="list-unstyled">
         {filteredBadges.map(badge => {
           return (
-            <li key={badge.id}>
+            <li key={badge.ID}>
               <Link
                 className="text-reset text-decoration-none"
-                to={`/badges/${badge.id}/details`}
+                to={`/badges/${badge.ID}/details`}
               >
                 <BadgesListItem badge={badge} />
               </Link>

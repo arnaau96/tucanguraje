@@ -4,14 +4,15 @@ import './styles/BadgeNew.css';
 import header from '../images/badge-header.svg';
 import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
-import api from '../api';
+import axios from 'axios';
 import PageLoading from '../components/PageLoading';
-
+const faker = require('faker');
 class BadgeNew extends React.Component {
   state = {
     loading: false,
     error: null,
     form: {
+      id:faker.random.uuid(),
       firstName: '',
       lastName: '',
       email: '',
@@ -20,6 +21,8 @@ class BadgeNew extends React.Component {
     },
   };
 
+
+  
   handleChange = e => {
     this.setState({
       form: {
@@ -35,7 +38,10 @@ class BadgeNew extends React.Component {
     
 
     try{
-      await api.badges.create(this.state.form);
+      console.log(JSON.stringify(this.state.form));
+      await axios.post('http://localhost:3002/api/badges/',{
+          data: {body:this.state.form}
+        });        
       this.setState({loading: false});
       this.props.history.push('/badges/query');
     } catch(error){
@@ -57,12 +63,12 @@ class BadgeNew extends React.Component {
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={this.state.form.firstName || 'FIRST NAME'}
-                lastName={this.state.form.lastName || 'LAST NAME'}
-                twitter={this.state.form.twitter || 'TWITTER'}
-                jobTitle={this.state.form.jobTitle || 'JOB TITLE'}
-                email={this.state.form.email || 'TWITTER'}
-                avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
+                firstName={this.state.form.FIRSTNAME || 'FIRST NAME'}
+                lastName={this.state.form.LASTNAME || 'LAST NAME'}
+                twitter={this.state.form.TWITTER || 'TWITTER'}
+                jobTitle={this.state.form.JOBTITLE || 'JOB TITLE'}
+                email={this.state.form.EMAIL || 'TWITTER'}
+                //avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
                 visible="N"
               />
             </div>

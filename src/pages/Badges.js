@@ -5,8 +5,9 @@ import './styles/Badges.css';
 import BadgesList from '../components/BadgesList';
 import PageLoading from '../components/PageLoading';
 
-import api from '../api'
 import PageError from '../components/PageError';
+
+import axios from 'axios';
 
 class Badges extends React.Component {
   constructor(props) {
@@ -43,8 +44,14 @@ class Badges extends React.Component {
     this.setState({ loading: true, error: null})
 
     try {
-      const data = await api.badges.list();
-      this.setState({ loading: false, data: data });
+       
+        const data = await axios.get('http://localhost:3002/api/badges/',{
+          headers: {
+              
+          }
+        });
+        console.log(data.data.data)
+      this.setState({ loading: false, data: data.data.data });
     } catch (error){
       this.setState({ loading: false, error: error });
     }

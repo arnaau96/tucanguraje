@@ -38,7 +38,7 @@ export default class Home extends Component {
     
     return (
       <React.Fragment>
-        <div class="masthead text-white text-center">        
+        <div className="masthead text-white text-center">        
           <HomeHeader query={this.state.query} onChange={this.myChangeHandler} onSubmit={this.handleSubmit} />
         </div>        
       
