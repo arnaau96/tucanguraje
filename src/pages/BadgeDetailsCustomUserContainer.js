@@ -1,5 +1,5 @@
 import React from 'react';
-import BadgeDetails from './BadgeDetails';
+import BadgeDetailsCustomUser from './BadgeDetailsCustomUser';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
 import axios from 'axios';
@@ -101,7 +101,7 @@ class BadgeDetailsContainer extends React.Component {
       return <PageError error={this.state.error} />;
     }
 
-    return <BadgeDetails 
+    return <BadgeDetailsCustomUser 
       onCloseModal={this.handleCloseModal} 
       onOpenModal={this.handleOpenModal}
       onInterested={this.handleInterested}

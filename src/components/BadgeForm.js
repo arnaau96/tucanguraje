@@ -5,60 +5,37 @@ class BadgeForm extends React.Component {
   render() {
     return (
       <div>
-
         <form onSubmit={this.props.onSubmit}>
           <div className="form-group">
-            <label>First Name</label>
+            <label>HORARIO</label>
             <input
               onChange={this.props.onChange}
               className="form-control"
               type="text"
-              name="firstName"
-              value={this.props.formValues.firstName}
+              name="HORARIO"
+              value={this.props.formValues.HORARIO}
             />
           </div>
 
           <div className="form-group">
-            <label>Last Name</label>
+            <label>PRECIO HORA</label>
+            <input
+              onChange={this.props.onChange}
+              className="form-control"
+              type="number"
+              name="PRECIOHORA"
+              value={this.props.formValues.PRECIOHORA}
+            />
+          </div>
+
+          <div className="form-group">
+            <label>DESCRIPCION</label>
             <input
               onChange={this.props.onChange}
               className="form-control"
               type="text"
-              name="lastName"
-              value={this.props.formValues.lastName}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="email"
-              name="email"
-              value={this.props.formValues.email}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Job Title</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="jobTitle"
-              value={this.props.formValues.jobTitle}
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Twitter</label>
-            <input
-              onChange={this.props.onChange}
-              className="form-control"
-              type="text"
-              name="twitter"
-              value={this.props.formValues.twitter}
+              name="DESCRIPCIONPETICION"
+              value={this.props.formValues.DESCRIPCIONPETICION}
             />
           </div>
 

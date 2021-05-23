@@ -6,27 +6,49 @@ import Badge from '../components/Badge';
 import BadgeForm from '../components/BadgeForm';
 import axios from 'axios';
 import PageLoading from '../components/PageLoading';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 const faker = require('faker');
 class BadgeNew extends React.Component {
   state = {
     loading: false,
     error: null,
+    formBadge: {
+      ID:faker.random.uuid(),
+      IDUSUARIO:cookies.get('ID'),
+      HORARIO:null,
+      PRECIOHORA:null,
+      DESCRIPCIONPETICION:null
+    },
     form: {
-      id:faker.random.uuid(),
-      firstName: '',
-      lastName: '',
-      email: '',
-      jobTitle: '',
-      twitter: '',
+      
     },
   };
 
+  componentDidMount(){
+    this.fetchData();
+  }
 
+  fetchData = async () => {
+    this.setState({ loading: true, error: null });
+
+    try {
+      const data = await axios.get('http://localhost:3002/api/users/'+cookies.get('ID'),{
+          headers: {
+              
+          }
+        });
+      this.setState({ loading: false, form: data.data.data[0] });
+    } catch (error) {
+      this.setState({ loading: false, error: error });
+    }
+  };
   
   handleChange = e => {
     this.setState({
-      form: {
-        ...this.state.form,
+      formBadge: {
+        ...this.state.formBadge,
         [e.target.name]: e.target.value,
       },
     });
@@ -36,15 +58,24 @@ class BadgeNew extends React.Component {
     e.preventDefault()
     this.setState({loading: true, error: null});
     
-
     try{
-      console.log(JSON.stringify(this.state.form));
-      await axios.post('http://localhost:3002/api/badges/',{
-          data: {body:this.state.form}
+      const data = await axios.get('http://localhost:3002/api/badges/'+this.state.formBadge.IDUSUARIO,{
+          
+        });   
+
+      if(!data.data.message){
+          await axios.post('http://localhost:3002/api/badges/',{
+          data: {body:this.state.formBadge}
         });        
-      this.setState({loading: false});
-      this.props.history.push('/badges/query');
+        this.setState({loading: false});
+        this.props.history.push('/badges/query');
+      }
+      else{
+        this.props.history.push('/badges/'+this.state.formBadge.IDUSUARIO+'/details');
+      }
+      
     } catch(error){
+      console.log("PETICION YA CREADA")
       this.setState({loading: false, error: error});
     }
   }
@@ -63,22 +94,17 @@ class BadgeNew extends React.Component {
           <div className="row">
             <div className="col-6">
               <Badge
-                firstName={this.state.form.FIRSTNAME || 'FIRST NAME'}
-                lastName={this.state.form.LASTNAME || 'LAST NAME'}
-                twitter={this.state.form.TWITTER || 'TWITTER'}
-                jobTitle={this.state.form.JOBTITLE || 'JOB TITLE'}
-                email={this.state.form.EMAIL || 'TWITTER'}
-                //avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
+                badge={this.state.form}                
                 visible="N"
               />
             </div>
 
             <div className="col-6">
-              <h1>New Attendant</h1>
+              <h1>Crear Petición</h1>
               <BadgeForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
-                formValues={this.state.form}
+                formValues={this.state.formBadge}
                 error={this.state.error}
               />
             </div>

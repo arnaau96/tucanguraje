@@ -1,38 +1,35 @@
 import React from 'react';
 
 import './styles/Badge.css';
-import Gravatar from './Gravatar';
 
 import Actions from '../components/Actions';
 
 class Badge extends React.Component {
   
   render() {
+    const badge = this.props.badge;
     return (
       <div className="Badge">
         
         <div className="Badge__section-name">
-          <Gravatar
-            className="Badge__avatar"
-            email={this.props.email}
-            alt="Avatar"
-          />
           <h1>
-            {this.props.firstName} <br /> {this.props.lastName}
+            {badge.NOMBRE} <br /> {badge.APELLIDO}
           </h1>
           <Actions 
-            id={this.props.id}
+            id={badge.ID}
+            idUsuario={badge.IDUSUARIO}
             isOpen={this.props.isOpen}
             onClose={this.props.onClose}
             onDeleteBadge={this.props.onDeleteBadge}
             onOpenModal={this.props.onOpenModal}
+            onInterested={this.props.onInterested}
             visible={this.props.visible}
           />
         </div>
 
         <div className="Badge__section-info">
-          <h3>{this.props.jobTitle}</h3>
-          <div>@{this.props.twitter}</div>
+          <h3>{badge.CIUDAD}</h3>
+          <div>@{badge.TWITTER}</div>
         </div>
 
         <div className="Badge__footer">#platziconf</div>

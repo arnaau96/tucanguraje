@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import './styles/Badges.css';
-import BadgesList from '../components/BadgesList';
+import InterestedList from '../components/InterestedList';
 import PageLoading from '../components/PageLoading';
-import Context from '../Context';
 import PageError from '../components/PageError';
 
 import axios from 'axios';
@@ -16,8 +14,7 @@ class Badges extends React.Component {
     this.state = {      
       loading: true,
       error: null,
-      data:undefined,
-      query: this.props.match.params.query,
+      data:undefined,      
     };
   }
 
@@ -45,7 +42,7 @@ class Badges extends React.Component {
 
     try {
        
-        const data = await axios.get('http://localhost:3002/api/badges/',{
+        const data = await axios.get('http://localhost:3002/api/interested/'+this.props.match.params.userId,{
           headers: {
               
           }
@@ -72,24 +69,10 @@ class Badges extends React.Component {
       return <PageError />;
     }
 
-    console.log('2/4. render()');
     return (
       <React.Fragment>      
-        <div className="Badges__container">
-        <Context.Consumer>
-        {
-        ({isAuth}) =>
-          isAuth ?
-          <div className="Badges__buttons">
-            <Link to="/badges/new" className="btn btn-primary">
-              Crear Peticion
-            </Link>
-          </div>
-          :
-          <div></div>
-        }
-        </Context.Consumer>      
-          <BadgesList badges={this.state.data} query={this.state.query} />
+        <div className="Badges__container">      
+          <InterestedList badges={this.state.data}/>
         </div>
       </React.Fragment>
     );

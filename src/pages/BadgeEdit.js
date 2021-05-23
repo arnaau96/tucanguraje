@@ -3,34 +3,34 @@ import React from 'react';
 import './styles/BadgeEdit.css';
 import header from '../images/badge-header.svg';
 import Badge from '../components/Badge';
-import BadgeForm from '../components/BadgeForm';
-import api from '../api/api';
 import PageLoading from '../components/PageLoading';
+import BadgeForm from '../components/BadgeForm';
+import axios from 'axios';
 
 class BadgeEdit extends React.Component {
   state = {
     loading: true,
     error: null,
-    form: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      jobTitle: '',
-      twitter: '',
-    },
+    form: undefined,
   };
 
   componentDidMount() {
+    console.log("GOLA");
     this.fetchData()
   }
 
   fetchData = async e => {
-    this.setState({loading: true, error: null})
+    this.setState({loading: true, error: null});
 
     try {
-      const data = await api.badges.read(this.props.match.params.badgeId)
-
-      this.setState({loading: false, form: data });
+      console.log(this.props.match.params.badgeId);
+      const data = await axios.get('http://localhost:3002/api/badges/'+this.props.match.params.badgeId,{
+          headers: {
+              
+          }
+        });
+      console.log("EDIT :" + data.data.data[0])
+      this.setState({loading: false, form: data.data.data[0] });
     } catch(error) {
       this.setState({loading: false, error: error});
     }
@@ -51,7 +51,9 @@ class BadgeEdit extends React.Component {
     
 
     try{
-      await api.badges.update(this.props.match.params.badgeId, this.state.form);
+      await axios.put('http://localhost:3002/api/badges/'+this.state.form.ID,{
+          data: {body:this.state.form}
+        }); 
       this.setState({loading: false});
       this.props.history.push('/badges/query');
     } catch(error){
@@ -74,18 +76,13 @@ class BadgeEdit extends React.Component {
             <div className="col-6">
               
               <Badge
-                firstName={this.state.form.firstName || 'FIRST NAME'}
-                lastName={this.state.form.lastName || 'LAST NAME'}
-                twitter={this.state.form.twitter || 'TWITTER'}
-                jobTitle={this.state.form.jobTitle || 'JOB TITLE'}
-                email={this.state.form.email || 'TWITTER'}
-                avatarUrl="https://www.gravatar.com/avatar/21594ed15d68ace3965642162f8d2e84?d=identicon"
+                badge={this.state.form}
                 visible="N"
               />
             </div>
 
             <div className="col-6">
-              <h1>Edit Attendant</h1>
+              <h1>Actualizar Petición</h1>
               <BadgeForm
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}

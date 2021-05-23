@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Context from '../Context';
 
 import './styles/BadgesList.css';
-import Gravatar from './Gravatar';
-
 class BadgesListItem extends React.Component {
   render() {
     return (
       <div className="BadgesListItem color">
-
-
         <div>
           <h5>
             <strong>
-              {this.props.badge.FIRSTNAME} {this.props.badge.LASTNAME}
+              {this.props.badge.NOMBRE} {this.props.badge.APELLIDO}
             </strong>
           </h5>
-          <br />@{this.props.badge.TWITTER}
+          <br /><strong>Ciudad: </strong>{this.props.badge.CIUDAD}
           <br />
-          {this.props.badge.JOBTITLE}
+          <strong>Edad: </strong>{this.props.badge.EDAD}
+          {this.props.badge.DESCRIPCION}
         </div>
       </div>
     );
@@ -37,7 +35,7 @@ function useSearchBadges(badges,propquery) {
 
   React.useMemo(() => {
     const result = badges.filter(badge => {
-      return `${badge.firstName} ${badge.lastName}`
+      return `${badge.CIUDAD}`
         .toLowerCase()
         .includes(query.toLowerCase());
     });
@@ -69,9 +67,17 @@ function BadgesList(props) {
         </div>
 
         <h3>No badges were found</h3>
-        <Link className="btn btn-primary" to="/badges/new">
-          Create new badge
-        </Link>
+        <Context.Consumer>
+        {
+        ({isAuth}) =>
+          isAuth ?   
+            <Link className="btn btn-primary" to="/badges/new">
+              Create new badge
+            </Link>
+          :
+          <div></div>
+        }
+        </Context.Consumer>
       </div>
     );
   }
@@ -96,7 +102,7 @@ function BadgesList(props) {
             <li key={badge.ID}>
               <Link
                 className="text-reset text-decoration-none"
-                to={`/badges/${badge.ID}/details`}
+                to={`/badges/${badge.IDUSUARIO}/details`}
               >
                 <BadgesListItem badge={badge} />
               </Link>

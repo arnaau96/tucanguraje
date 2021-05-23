@@ -16,7 +16,7 @@ function BadgeDetails(props) {
               onDeleteBadge={props.onDeleteBadge}
               onOpenModal={props.onOpenModal}
               onInterested={props.onInterested}
-              visible='S'
+              visible='N'
             />
           </div>
         </div>

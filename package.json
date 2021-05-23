@@ -12,6 +12,9 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@material-ui/icons": "^4.11.2",
     "@popperjs/core": "^2.9.2",
     "axios": "^0.21.1",
@@ -23,8 +26,10 @@
     "react-button": "^1.2.1",
     "react-dom": "16.8.3",
     "react-dropdown": "^1.9.2",
+    "react-icons": "^4.2.0",
     "react-router-dom": "4.3.1",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^2.1.8",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "faker": "^4.1.0",

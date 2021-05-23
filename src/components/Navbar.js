@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Context from '../Context';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 class Navbar extends React.Component {
 
@@ -17,10 +20,26 @@ class Navbar extends React.Component {
 
   handleClick = (event) => {
     this.setState({anchorEl: event.currentTarget});
+    console.log("LOGIN "+cookies.get("LOGIN"));
   };
 
   handleClose = () => {
     this.setState({anchorEl: null});
+  };
+
+  handleProfile = () => {
+    window.location.href='/profile/'+cookies.get('ID');
+  };
+
+  handleInterested = () => {
+    window.location.href='/interested/'+cookies.get('ID');
+  };
+
+  handleCloseSesion = () => {
+    cookies.remove('ID', {path: "/"});
+    cookies.remove('EMAIL', {path: "/"});
+    cookies.remove('LOGIN', {path: "/"});
+    window.location.href='/';
   };
 
   render() {
@@ -50,14 +69,15 @@ class Navbar extends React.Component {
                     open={Boolean(this.state.anchorEl)}
                     onClose={this.handleClose}
                   >
-                    <MenuItem onClick={this.handleClose}>Perfil</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Mi Cuenta</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={this.handleInterested}>Interesados</MenuItem>
+                    <MenuItem onClick={this.handleClose}>Acuerdos</MenuItem>
+                    <MenuItem onClick={this.handleProfile}>Modificar Perfil</MenuItem>
+                    <MenuItem onClick={this.handleCloseSesion}>Logout</MenuItem>
                   </Menu>
                 </div>
                   :
                   <div className="Navbar__brand col-1">  
-                  <Link to="/">
+                  <Link to="/login">
                     <img className="Navbar__brand-logo order-1" src={iconoUsuario} alt="Logo" />
                   </Link>
                 </div>
