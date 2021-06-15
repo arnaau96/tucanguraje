@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context';
 
+import logo from '../images/logo.png';
+
 import './styles/BadgesList.css';
 class BadgesListItem extends React.Component {
   render() {
     return (
       <div className="BadgesListItem color">
+        <div>
+          <img className="imagenListaPeticion" alt="" src={logo} />
+        </div>
         <div>
           <h5>
             <strong>
@@ -16,7 +21,8 @@ class BadgesListItem extends React.Component {
           <br /><strong>Ciudad: </strong>{this.props.badge.CIUDAD}
           <br />
           <strong>Edad: </strong>{this.props.badge.EDAD}
-          {this.props.badge.DESCRIPCION}
+          <br/><strong>Descripcion: </strong> {this.props.badge.DESCRIPCIONPETICION}
+          
         </div>
       </div>
     );
@@ -55,7 +61,7 @@ function BadgesList(props) {
     return (
       <div>
         <div className="form-group">
-          <label>Filter Badges</label>
+          <label>Filtrar por Ciudad</label>
           <input
             type="text"
             className="form-control"
@@ -66,13 +72,13 @@ function BadgesList(props) {
           />
         </div>
 
-        <h3>No badges were found</h3>
+        <h3>No hay peticiones disponibles</h3>
         <Context.Consumer>
         {
         ({isAuth}) =>
           isAuth ?   
             <Link className="btn btn-primary" to="/badges/new">
-              Create new badge
+              Crear una nueva petición.
             </Link>
           :
           <div></div>
@@ -85,7 +91,7 @@ function BadgesList(props) {
   return (
     <div className="BadgesList">
       <div className="form-group">
-        <label>Filter Badges</label>
+        <label>Filtrar por Ciudad</label>
         <input
           type="text"
           className="form-control"

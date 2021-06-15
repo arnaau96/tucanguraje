@@ -18,17 +18,18 @@ class Actions extends React.Component {
         return(
           <div>
             <div>
-                <div>
+                <div className="float-right">
                 <Link
-                  className="btn btn-primary mb-4"
+                  className=" btn btn-primary mb-4"
                   to={`/badges/${cookies.get('ID')}/edit`}
                 >
                   Edit
                 </Link>
-              </div>
-              <button onClick={data.onOpenModal} className="btn btn-danger">
+                <br/>
+                <button onClick={data.onOpenModal} className="float-right btn btn-danger">
                 Delete
               </button>
+              </div>              
               <DeleteBadgeModal
                 isOpen={data.isOpen}
                 onClose={data.onClose}
@@ -43,12 +44,21 @@ class Actions extends React.Component {
         else if(cookies.get('LOGIN')){
           return(
             <div>
-              <button onClick={data.onInterested} className="btn btn-primary">
+              <button onClick={data.onInterested} className="float-right btn btn-primary">
                 Me interesa!
+              </button>
+              <br/><br/>
+              <button onClick={data.onOpenValoraciones} className="float-right btn btn-danger">
+                Ver Valoraciones
+              </button>
+              <br/><br/>
+              <button onClick={data.onCreateValoraciones} className="float-right btn btn-danger">
+                Valorar
               </button>
             </div>
           );
         }
+        
         else{
           return(
             <div>
@@ -56,6 +66,27 @@ class Actions extends React.Component {
             </div>
           )
         }
+      }
+      else if(data.visible==="I"){
+        return(
+          <div>
+            <div>
+              <div>
+                <button onClick={data.onOpenChat} className="float-right btn btn-primary mb-4">
+                Chat
+                </button>
+              </div>
+              <button onClick={data.onOpenValoraciones} className="float-right btn btn-danger">
+                Ver Valoraciones
+              </button>
+              <button onClick={data.onCreateValoraciones} className="float-right btn btn-danger">
+                Valorar
+              </button>
+            </div>
+          
+          </div>
+          
+          );  
       }
       else{
           return(

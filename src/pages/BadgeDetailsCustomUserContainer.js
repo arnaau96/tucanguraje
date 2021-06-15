@@ -23,7 +23,7 @@ class BadgeDetailsContainer extends React.Component {
     this.setState({ loading: true, error: null });
 
     try {
-      const data = await axios.get('http://localhost:3002/api/badges/'+this.props.match.params.badgeId,{
+      const data = await axios.get('http://localhost:3002/api/users/'+this.props.match.params.badgeId,{
           headers: {
               
           }
@@ -92,6 +92,51 @@ class BadgeDetailsContainer extends React.Component {
     }
   }
 
+  handleOpenChat = async e => {
+    this.setState({loading: true, error: null});
+    
+    try{
+      const existeChat = await axios.get('http://localhost:3002/api/chat/'+cookies.get('ID')+'/'+this.props.match.params.badgeId,{
+          headers: {
+              
+          }
+        });
+      
+        console.log(existeChat);
+
+      if(existeChat.data.data.length === 0){      
+        await axios.post('http://localhost:3002/api/chat/'+cookies.get('ID')+'/'+this.props.match.params.badgeId,{
+            headers: {
+                
+            }
+        });
+      } 
+      this.props.history.push('/chat/'+cookies.get('ID'));
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
+  handleOpenValoraciones = async e => {
+    this.setState({loading: true, error: null});
+    
+    try{
+        this.props.history.push('/valoraciones/'+this.props.match.params.badgeId);
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
+  handleCreateValoraciones = async e => {
+    this.setState({loading: true, error: null});
+    
+    try{
+        this.props.history.push('/createValoracion/'+this.props.match.params.badgeId);
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
   render() {
     if (this.state.loading) {
       return <PageLoading />;
@@ -106,6 +151,9 @@ class BadgeDetailsContainer extends React.Component {
       onOpenModal={this.handleOpenModal}
       onInterested={this.handleInterested}
       onDeleteBadge={this.handleDeleteBadge}
+      onOpenChat={this.handleOpenChat}
+      onOpenValoraciones={this.handleOpenValoraciones}
+      onCreateValoraciones={this.handleCreateValoraciones}
       modalIsOpen={this.state.modalIsOpen}
       badge={this.state.data} 
     />;

@@ -6,7 +6,7 @@ class ProfileForm extends React.Component {
         return (
             <React.Fragment>
             <div className="container-signup color">
-                <h1>Regístrate</h1>
+                <h1>Modificar Perfil</h1>
                 <form className="form-signup" onSubmit={this.props.onSubmit}>
                     <div className="form-group">
                         <label className="control-label">Nombre*</label>
@@ -20,12 +20,12 @@ class ProfileForm extends React.Component {
 
                     <div className="form-group">
                         <label className="control-label">Email*</label>
-                        <input type="email" onChange={this.props.onChange} className="form-control" name="EMAIL" maxLength="100" placeholder="Email" value={this.props.form.EMAIL} required/>
+                        <input type="email" onChange={this.props.onChange} className="form-control" name="EMAIL" maxLength="100" placeholder="Email" value={this.props.form.EMAIL} disabled/>
                     </div>                   
                                             
                     <div className="form-group">
                         <label className="control-label">Nombre Usuario*</label>
-                        <input type="text" onChange={this.props.onChange} className="form-control" name="NOMBREUSUARIO" maxLength="100" placeholder="Nombre Usuario" value={this.props.form.NOMBREUSUARIO} required/>
+                        <input type="text" onChange={this.props.onChange} className="form-control" name="NOMBREUSUARIO" maxLength="100" placeholder="Nombre Usuario" value={this.props.form.NOMBREUSUARIO} disabled/>
                     </div>    
 
                     <div className="form-group">
@@ -76,10 +76,6 @@ class ProfileForm extends React.Component {
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">Continuar</button>
                     </div>     
-
-                    {this.props.mensaje && (
-                    <p className="text-danger">{this.props.mensaje}</p>
-                    )}
 
                 </form>
             </div>

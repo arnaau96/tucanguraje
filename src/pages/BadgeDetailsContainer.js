@@ -28,7 +28,7 @@ class BadgeDetailsContainer extends React.Component {
               
           }
         });
-      console.log(data.data.data[0]);
+
       this.setState({ loading: false, data: data.data.data[0] });
     } catch (error) {
       this.setState({ loading: false, error: error });
@@ -62,12 +62,21 @@ class BadgeDetailsContainer extends React.Component {
 
       var idPeticion = dataBadge.data.data[0].ID;  
       var idUsuario = dataUsuario.data.data[0].ID;
-
-      await axios.post('http://localhost:3002/api/interested/'+idPeticion+'/'+idUsuario,{
+      const existPeticion = await axios.get('http://localhost:3002/api/interested/getInterestedPeticionProfile/'+idPeticion+'/'+idUsuario,{
           headers: {
               
           }
         });
+        console.log(existPeticion.data.data.length);
+      if(existPeticion.data.data.length === 0)  
+        await axios.post('http://localhost:3002/api/interested/'+idPeticion+'/'+idUsuario,{
+            headers: {
+                
+            }
+          });
+      else{
+        alert("YA EXISTE UN INTERÉS");
+      }
       this.setState({loading: false});
       this.props.history.push('/badges/query');
     } catch(error){
@@ -92,6 +101,26 @@ class BadgeDetailsContainer extends React.Component {
     }
   }
 
+  handleOpenValoraciones = async e => {
+    this.setState({loading: true, error: null});
+    
+    try{
+        this.props.history.push('/valoraciones/'+this.props.match.params.badgeId);
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
+  handleCreateValoraciones = async e => {
+    this.setState({loading: true, error: null});
+    
+    try{
+        this.props.history.push('/createValoracion/'+this.props.match.params.badgeId);
+    } catch(error){
+      this.setState({loading: false, error: error});
+    }
+  }
+
   render() {
     if (this.state.loading) {
       return <PageLoading />;
@@ -106,6 +135,8 @@ class BadgeDetailsContainer extends React.Component {
       onOpenModal={this.handleOpenModal}
       onInterested={this.handleInterested}
       onDeleteBadge={this.handleDeleteBadge}
+      onOpenValoraciones={this.handleOpenValoraciones}
+      onCreateValoraciones={this.handleCreateValoraciones}
       modalIsOpen={this.state.modalIsOpen}
       badge={this.state.data} 
     />;

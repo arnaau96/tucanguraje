@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './styles/BadgeEdit.css';
-import header from '../images/badge-header.svg';
 import Badge from '../components/Badge';
 import PageLoading from '../components/PageLoading';
 import BadgeForm from '../components/BadgeForm';
@@ -67,10 +66,6 @@ class BadgeEdit extends React.Component {
     }
     return (
       <React.Fragment>
-        <div className="BadgeEdit__hero">
-          <img className="img-fluid" src={header} alt="Logo" />
-        </div>
-
         <div className="container">
           <div className="row">
             <div className="col-6">

@@ -1,20 +1,21 @@
 import React from 'react';
 
-import './styles/Badges.css';
-import InterestedList from '../components/InterestedList';
+import './styles/Valoraciones.css';
+import ValoracionList from '../components/ValoracionList';
 import PageLoading from '../components/PageLoading';
 import PageError from '../components/PageError';
 
 import axios from 'axios';
 
-class Badges extends React.Component {
+class Valoracion extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {      
       loading: true,
       error: null,
-      data:undefined,      
+      data:undefined,
+      query: this.props.match.params.query,
     };
   }
 
@@ -42,7 +43,7 @@ class Badges extends React.Component {
 
     try {
        
-        const data = await axios.get('http://localhost:3002/api/interested/'+this.props.match.params.userId,{
+        const data = await axios.get('http://localhost:3002/api/valoracion/'+this.props.match.params.userId,{
           headers: {
               
           }
@@ -67,15 +68,25 @@ class Badges extends React.Component {
     if(this.state.error === true){
       return <PageError />;
     }
-
-    return (
-      <React.Fragment>      
-        <div className="Badges__container">      
-          <InterestedList badges={this.state.data}/>
-        </div>
-      </React.Fragment>
-    );
+    if(this.state.data.length!==0){
+      return (
+        <React.Fragment>      
+          <div className="Valoraciones__container">
+            <ValoracionList valoraciones={this.state.data} query={this.state.query} />
+          </div>
+        </React.Fragment>
+      );
+    }
+    else{
+      return (
+        <React.Fragment>      
+          <div className="Valoraciones__container">
+            <h1>No hay valoraciones para mostrar</h1>
+          </div>
+        </React.Fragment>
+      );
+    }
   }
 }
 
-export default Badges;
+export default Valoracion;

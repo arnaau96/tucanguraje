@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './styles/BadgeDetails.css';
-import Badge from '../components/Badge';
+import BadgeCustomUser from '../components/BadgeCustomUser';
 
 function BadgeDetails(props) {
   return (
@@ -9,14 +9,17 @@ function BadgeDetails(props) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <Badge
+            <BadgeCustomUser
               badge={props.badge}
               isOpen={props.modalIsOpen}
               onClose={props.onCloseModal}
               onDeleteBadge={props.onDeleteBadge}
+              onOpenChat={props.onOpenChat}
               onOpenModal={props.onOpenModal}
               onInterested={props.onInterested}
-              visible='N'
+              onOpenValoraciones={props.onOpenValoraciones}
+              onCreateValoraciones={props.onCreateValoraciones}
+              visible='I'
             />
           </div>
         </div>

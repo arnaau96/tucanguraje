@@ -21,14 +21,14 @@ function HomeHeader(props) {
                         </div>
                         <div className="col-12 col-md-3">
                             <button onClick={props.onSubmit} className="btn btn-block btn-lg btn-primary"> 
-                                ENVIAR! 
+                                BUSCAR! 
                             </button>
                         </div>
                     </div>
                 </form>
                 </div>
               </div>
-            </div>
+            </div>            
         </React.Fragment>
   );
 }

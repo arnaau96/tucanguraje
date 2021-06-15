@@ -1,9 +1,18 @@
+hr{
+  color: white;
+  background-color: white;
+  height: 5;
+}
+
 .Badge {
-  background: #FFFFFF;
+  background: orange;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
   border-radius: 8px 8px 8px 8px;
   overflow: hidden;
-  height: 380px;
+  height: 100%;
+  margin-top: 40px;
+  padding:20px;
+  color:white;
 }
 
 .Badge__header {
@@ -24,11 +33,13 @@
 .Badge__section-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.5rem 0;
-  background: #F4F4F7;
+  justify-content: left;
+  align-items: left;
+  padding: 1rem 0;
+  margin-top:15px;
+  background: orange;
 }
+
 
 
 .Badge__avatar {
@@ -46,4 +57,21 @@
   color: #98CA3F;
   font-weight: bold;
   font-style: italic;
+}
+
+.imagenPeticion{
+  width:150px;
+  padding: 12px;
+  margin-right: 10px;
+  background: grey;
+}
+
+.botonesPeticion{
+  float: right;
+}
+
+.fuente{
+  font-size:20px;
+  margin-bottom:5px;
+  border-bottom: 1px solid white;
 }

@@ -12,6 +12,9 @@ import Profile from '../pages/Profile';
 import Interested from '../pages/Interested';
 import BadgeDetailsContainer from '../pages/BadgeDetailsContainer';
 import BadgeDetailsCustomUserContainer from '../pages/BadgeDetailsCustomUserContainer';
+import Valoracion from '../pages/Valoracion';
+import CreateValoracion from '../pages/CreateValoracion';
+import Chat from '../pages/Chat';
 import NotFound from '../pages/NotFound';
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
           <Route exact path="/badges/:badgeId/details" component={BadgeDetailsContainer} />
           <Route exact path="/badges/:badgeId/detailsCustomUser" component={BadgeDetailsCustomUserContainer} />
           <Route exact path="/interested/:userId" component={Interested} />
+          <Route exact path="/chat/:userId" component={Chat} />
+          <Route exact path="/valoraciones/:userId" component={Valoracion} />
+          <Route exact path="/createValoracion/:userId" component={CreateValoracion} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

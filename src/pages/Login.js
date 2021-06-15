@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 //import 'react-dropdown/style.css';
 
 import LoginForm from '../components/LoginForm.js';
+import PageLoading from '../components/PageLoading';
+import PageError from '../components/PageError';
 
 import './styles/Login.css';
 import axios from 'axios';
@@ -51,8 +53,13 @@ export default class Login extends Component {
           cookies.set('ID',res.ID, {path: "/"})
           cookies.set('EMAIL',res.EMAIL, {path: "/"})
           cookies.set('LOGIN',true, {path: "/"})
-
+          this.setState({loading: false});
           window.location.href='./';
+          await axios.put('http://localhost:3002/api/users/setOnline/'+this.state.form.EMAIL.toLowerCase(),{
+            headers: {
+            
+            }
+          });
         }
         else{
           this.setState({loading: false, mensaje: "Contrasenya Incorrecta"});
@@ -62,7 +69,7 @@ export default class Login extends Component {
         this.setState({loading: false, mensaje: "Email Inexistente"});
       }
 
-      this.props.history.get(`/badges/query/${this.state.form.EMAIL}`);
+      //this.props.history.get(`/badges/query/${this.state.form.EMAIL}`);
     } catch(error){
       this.setState({loading: false, error: error});
     }
@@ -71,7 +78,13 @@ export default class Login extends Component {
   
 
   render() {
-    
+    if (this.state.loading) {
+      return <PageLoading />;
+    }
+
+    if (this.state.error) {
+      return <PageError error={this.state.error} />;
+    }
     return (
       <React.Fragment>
         <div className="text-white text-center">        

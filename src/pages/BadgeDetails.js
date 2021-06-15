@@ -13,6 +13,8 @@ function BadgeDetails(props) {
               badge={props.badge}
               isOpen={props.modalIsOpen}
               onClose={props.onCloseModal}
+              onOpenValoraciones={props.onOpenValoraciones}
+              onCreateValoraciones={props.onCreateValoraciones}
               onDeleteBadge={props.onDeleteBadge}
               onOpenModal={props.onOpenModal}
               onInterested={props.onInterested}

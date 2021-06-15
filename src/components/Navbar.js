@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Context from '../Context';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import axios from 'axios';
+import { FaChevronLeft } from 'react-icons/fa';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
@@ -35,7 +37,16 @@ class Navbar extends React.Component {
     window.location.href='/interested/'+cookies.get('ID');
   };
 
-  handleCloseSesion = () => {
+  handleChat = () => {
+    window.location.href='/chat/'+cookies.get('ID');
+  };
+
+  handleCloseSesion = async () => {
+    await axios.put('http://localhost:3002/api/users/setOffline/'+cookies.get('EMAIL').toLowerCase(),{
+            headers: {
+            
+            }
+          });
     cookies.remove('ID', {path: "/"});
     cookies.remove('EMAIL', {path: "/"});
     cookies.remove('LOGIN', {path: "/"});
@@ -70,7 +81,7 @@ class Navbar extends React.Component {
                     onClose={this.handleClose}
                   >
                     <MenuItem onClick={this.handleInterested}>Interesados</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Acuerdos</MenuItem>
+                    <MenuItem onClick={this.handleChat}>Chats</MenuItem>
                     <MenuItem onClick={this.handleProfile}>Modificar Perfil</MenuItem>
                     <MenuItem onClick={this.handleCloseSesion}>Logout</MenuItem>
                   </Menu>
@@ -85,6 +96,7 @@ class Navbar extends React.Component {
             </Context.Consumer>
           </div>          
         </div>
+        <div onClick={() => window.history.back()}><FaChevronLeft/> Go Back</div>
       </div>
     );
   }
